@@ -8,19 +8,10 @@ const DashboardPage = () => {
 
   const logout = useAuthStore(state => state.logout);
   const navigate = useNavigate();
-  const { completedWeeks, badges } = useProgressStore();
+  const { badges } = useProgressStore();
   
   // Datos simulados de semanas (en una app real vendrían de una API/store)
-  const weeks = [
-    { id: 1, title: 'Introducción al Cálculo Multivariante' },
-    { id: 2, title: 'Vectores y Espacio Vectorial' },
-    { id: 3, title: 'Derivadas Parciales' },
-    { id: 4, title: 'Gradientes y Direccionales' },
-    { id: 5, title: 'Optimización' },
-    { id: 6, title: 'Integrales Múltiples' },
-    { id: 7, title: 'Teorema de Green y Stokes' },
-    { id: 8, title: 'Aplicaciones en Ciencia de Datos' },
-  ];
+
   
 
   // Calcular progreso global
