@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import type { ModuleActivity } from '../components/ModuleActivities';
 import { useParams, useNavigate } from 'react-router-dom';
 import ModuleActivities from '../components/ModuleActivities';
 import ModuleQuiz from '../components/ModuleQuiz';
 import { useProgressStore, MINIMUM_PASSING_SCORE } from '../store/progressStore';
 
 // Datos simulados para módulos
-const moduleData = {
+const moduleData: { [key: string]: {
+  id: string;
+  title: string;
+  description: string;
+  activities: ModuleActivity[];
+}} = {
   '1': {
     id: '1',
     title: 'Introducción al Cálculo Multivariante',
@@ -23,7 +29,9 @@ const moduleData = {
             <li>Concepto de espacio vectorial</li>
             <li>Introducción a las funciones de varias variables</li>
           </ul>
-        `
+        `,
+        locked: false,
+        completed: false
       },
       {
         id: '2',
@@ -37,7 +45,9 @@ const moduleData = {
             <li>g(x, y) = ln(x - y)</li>
             <li>h(x, y, z) = 1/(x² + y² + z²)</li>
           </ol>
-        `
+        `,
+        locked: false,
+        completed: false
       },
       {
         id: '3',
@@ -67,7 +77,9 @@ ax = fig.add_subplot(111, projection='3d')
 surface = ax.plot_surface(X, Y, Z, cmap='viridis')
 plt.show()
           </pre>
-        `
+        `,
+        locked: false,
+        completed: false
       },
       {
         id: '4',
@@ -129,7 +141,9 @@ plt.show()
             ],
             correctAnswer: 0
           }
-        ]
+        ],
+        locked: false,
+        completed: false
       }
     ]
   },
@@ -150,7 +164,9 @@ plt.show()
             <li>Propiedades de los espacios vectoriales</li>
             <li>Bases y dimensión</li>
           </ul>
-        `
+        `,
+        locked: false,
+        completed: false
       },
       {
         id: '2',
@@ -164,7 +180,9 @@ plt.show()
             <li>Calcula el producto escalar u·v y la norma ||u||</li>
             <li>Determina si los vectores (1,1,1) y (2,2,2) son linealmente independientes</li>
           </ol>
-        `
+        `,
+        locked: false,
+        completed: false
       },
       {
         id: '3',
@@ -208,7 +226,9 @@ ax.legend()
 plt.title('Visualización de Vectores en 3D')
 plt.show()
           </pre>
-        `
+        `,
+        locked: false,
+        completed: false
       },
       {
         id: '4',
@@ -270,7 +290,9 @@ plt.show()
             ],
             correctAnswer: 1
           }
-        ]
+        ],
+        locked: false,
+        completed: false
       }
     ]
   },
@@ -291,7 +313,9 @@ plt.show()
             <li>Interpretación geométrica</li>
             <li>Cálculo de derivadas parciales</li>
           </ul>
-        `
+        `,
+        locked: false,
+        completed: false
       },
       {
         id: '2',
@@ -305,7 +329,9 @@ plt.show()
             <li>g(x,y) = e^(x+y) + ln(xy)</li>
             <li>h(x,y,z) = x²y + yz + xz²</li>
           </ol>
-        `
+        `,
+        locked: false,
+        completed: false
       },
       {
         id: '3',
@@ -375,7 +401,9 @@ ax3.set_zlabel('∂f/∂y')
 plt.tight_layout()
 plt.show()
           </pre>
-        `
+        `,
+        locked: false,
+        completed: false
       },
       {
         id: '4',
@@ -437,7 +465,9 @@ plt.show()
             ],
             correctAnswer: 1
           }
-        ]
+        ],
+        locked: false,
+        completed: false
       }
     ]
   },
@@ -458,7 +488,9 @@ plt.show()
             <li>Interpretación geométrica</li>
             <li>Propiedades del gradiente</li>
           </ul>
-        `
+        `,
+        locked: false,
+        completed: false
       },
       {
         id: '2',
@@ -472,7 +504,9 @@ plt.show()
             <li>g(x,y,z) = xe^(y+z), en el punto (1,0,0)</li>
             <li>h(x,y) = ln(x² + y²), en el punto (3,4)</li>
           </ol>
-        `
+        `,
+        locked: false,
+        completed: false
       },
       {
         id: '3',
@@ -526,7 +560,9 @@ plt.grid(True)
 plt.axis('equal')
 plt.show()
           </pre>
-        `
+        `,
+        locked: false,
+        completed: false
       },
       {
         id: '4',
@@ -588,17 +624,20 @@ plt.show()
             ],
             correctAnswer: 2
           }
-        ]
+        ],
+        locked: false,
+        completed: false
       }
     ]
   }
 };
 
+
 const ModulePage = () => {
   const { weekId, moduleId } = useParams();
   const navigate = useNavigate();
-  const [activeView, setActiveView] = useState('overview');
-  const [activeActivity, setActiveActivity] = useState(null);
+  const [activeView, setActiveView] = useState<'overview' | 'activity'>('overview');
+  const [activeActivity, setActiveActivity] = useState<ModuleActivity | null>(null);
   const { completedActivities, getModuleScore, isModulePassed, completeActivity, completeWeek } = useProgressStore();
   
   // Función para desbloquear el siguiente módulo
@@ -616,7 +655,7 @@ const ModulePage = () => {
   const module = moduleId ? moduleData[moduleId] : null;
   
   // Estado para controlar el progreso del usuario
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useState<ModuleActivity[]>([]);
   
   useEffect(() => {
     if (module) {
@@ -630,7 +669,7 @@ const ModulePage = () => {
         totalScore: 0
       };
       
-      const processedActivities = module.activities.map((activity, index) => {
+      const processedActivities = module.activities.map((activity: ModuleActivity, index: number) => {
         let isCompleted = false;
         let isLocked = false;
         
@@ -649,7 +688,7 @@ const ModulePage = () => {
         // El quiz está bloqueado hasta que todas las demás actividades estén completadas
         if (activity.type === 'quiz') {
           const nonQuizActivities = module.activities.filter(a => a.type !== 'quiz');
-          const completedNonQuizCount = nonQuizActivities.reduce((count, act) => {
+          const completedNonQuizCount = nonQuizActivities.reduce((count: number, act: ModuleActivity) => {
             if (act.type === 'lesson' && userProgress.lessons.includes(act.id)) return count + 1;
             if (act.type === 'exercise' && userProgress.exercises.includes(act.id)) return count + 1;
             if (act.type === 'code' && userProgress.code.includes(act.id)) return count + 1;
@@ -686,14 +725,14 @@ const ModulePage = () => {
     return <div>Módulo no encontrado</div>;
   }
   
-  const handleActivityClick = (activity) => {
+  const handleActivityClick = (activity: ModuleActivity): void => {
     if (activity.locked) return;
     
     setActiveActivity(activity);
     setActiveView('activity');
   };
   
-  const handleCompleteActivity = (activity) => {
+  const handleCompleteActivity = (activity: ModuleActivity): void => {
     if (!weekId || !moduleId) return;
     
     completeActivity(Number(weekId), Number(moduleId), activity.type, activity.id);
@@ -736,8 +775,8 @@ const ModulePage = () => {
         
         {/* Visualización de actividades en formato horizontal */}
         <ModuleActivities 
-          weekId={weekId} 
-          moduleId={moduleId}
+          weekId={weekId ?? ''} 
+          moduleId={moduleId ?? ''}
           activities={activities}
           onActivityClick={handleActivityClick}
         />
@@ -775,12 +814,13 @@ const ModulePage = () => {
   if (activeView === 'activity' && activeActivity) {
     // Si es un cuestionario, mostrar el componente de cuestionario
     if (activeActivity.type === 'quiz') {
+      // Quiz activity: Type assertion for questions property
       return (
         <ModuleQuiz 
-          weekId={weekId}
-          moduleId={moduleId}
+          weekId={weekId ?? ''}
+          moduleId={moduleId ?? ''}
           title={activeActivity.title}
-          questions={activeActivity.questions}
+          questions={(activeActivity as any).questions}
           onComplete={handleQuizComplete}
         />
       );
@@ -792,12 +832,12 @@ const ModulePage = () => {
         
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-xl font-semibold mb-4">{activeActivity.title}</h2>
-          
           {/* Contenido de la actividad */}
-          <div className="prose max-w-none mb-8" dangerouslySetInnerHTML={{ __html: activeActivity.content }} />
-          
+          {'content' in activeActivity && activeActivity.content && (
+            <div className="prose max-w-none mb-8" dangerouslySetInnerHTML={{ __html: activeActivity.content }} />
+          )}
           {/* Botón para marcar como completada */}
-          {!activeActivity.completed && (
+          {'completed' in activeActivity && !activeActivity.completed && (
             <button
               onClick={() => {
                 handleCompleteActivity(activeActivity);

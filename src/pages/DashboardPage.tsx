@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+
 import { useAuthStore } from '../store/authStore';
 import { useProgressStore } from '../store/progressStore';
 import ModuleProgress from '../components/ModuleProgress';
@@ -38,7 +38,7 @@ const modules = {
 
 const DashboardPage = () => {
   const user = useAuthStore(state => state.user);
-  const { completedWeeks, completedLessons, badges, xp, isModulePassed } = useProgressStore();
+  const { completedWeeks, badges, xp, isModulePassed } = useProgressStore();
   
   // Datos simulados de semanas (en una app real vendrían de una API/store)
   const weeks = [
@@ -52,14 +52,8 @@ const DashboardPage = () => {
     { id: 8, title: 'Aplicaciones en Ciencia de Datos' },
   ];
   
-  // Verificar si una semana es accesible (completó la semana anterior o es la primera)
-  const isAccessible = (weekId) => {
-    if (weekId === 1) return true;
-    return completedWeeks.includes(weekId - 1);
-  };
-
   // Verificar si un módulo de la semana 1 es accesible
-  const isModuleAccessible = (moduleId) => {
+  const isModuleAccessible = (moduleId: string) => {
     if (moduleId === '1') return true;
     
     // Para los módulos siguientes, verificar si el módulo anterior está aprobado

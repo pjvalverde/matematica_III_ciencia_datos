@@ -1,11 +1,13 @@
-import { Link, useLocation, useParams } from 'react-router-dom';
+
+import { Link, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 
 const Navbar = () => {
   const user = useAuthStore(state => state.user);
   const logout = useAuthStore(state => state.logout);
   const location = useLocation();
-  const params = useParams();
+  
+  
   
   // Verificar si estamos en una página de semana 1
   const isInWeek1 = location.pathname.startsWith('/semana/1');
@@ -22,14 +24,14 @@ const Navbar = () => {
   // Obtener el título basado en la ruta actual
   const getCurrentTitle = () => {
     const activePath = getActivePath();
-    const pathMap = {
-      'leccion': 'Introducción al Cálculo Multivariante',
-      'ejercicio-analitico': 'Ejercicios Analíticos',
-      'ejercicio-codigo': 'Ejercicios de Código',
-      'reto': 'Reto Semanal'
+    const labels: Record<string, string> = {
+      leccion: 'Lección',
+      'ejercicio-analitico': 'Ejercicio Analítico',
+      'ejercicio-codigo': 'Ejercicio de Código',
+      reto: 'Reto',
     };
     
-    return pathMap[activePath] || 'Semana 1';
+    return labels[activePath] || 'Semana 1';
   };
   
   // Si estamos en la semana 1, mostrar navegación contextual

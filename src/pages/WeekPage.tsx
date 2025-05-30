@@ -1,8 +1,8 @@
 import { useParams, Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import Editor from '@monaco-editor/react';
+
 import { useProgressStore } from '../store/progressStore';
-import { useAuthStore } from '../store/authStore';
+
 
 // Datos simulados de módulos
 const modules = {
@@ -505,8 +505,8 @@ const WeekPage = () => {
   const [activeSection, setActiveSection] = useState('overview');
   const { isModulePassed } = useProgressStore();
   
-  const user = useAuthStore(state => state.user);
-  const isWeek1 = weekId === '1';
+  
+  
 
   // Obtener la sección activa del estado de localización si está disponible
   useEffect(() => {
@@ -530,7 +530,7 @@ const WeekPage = () => {
   const weekModules = modules[weekId as keyof typeof modules] || [];
 
   // Verificar si un módulo es accesible
-  const isModuleAccessible = (moduleId) => {
+  const isModuleAccessible = (moduleId: string) => {
     if (moduleId === '1') return true;
     
     // Para los módulos siguientes, verificar si el módulo anterior está aprobado

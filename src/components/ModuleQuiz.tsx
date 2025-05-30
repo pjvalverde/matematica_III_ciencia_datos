@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useProgressStore, ACTIVITY_POINTS } from '../store/progressStore';
 
 interface QuizQuestion {

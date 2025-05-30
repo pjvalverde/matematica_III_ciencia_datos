@@ -1,12 +1,13 @@
-import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const AnalyticalExercisePage = () => {
   const { weekId, exerciseId } = useParams();
   const [solution, setSolution] = useState('');
-  const [feedback, setFeedback] = useState(null);
+  type Feedback = { isCorrect: boolean; message: string } | null;
+  const [feedback, setFeedback] = useState<Feedback>(null);
   
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFeedback({ 
       isCorrect: Math.random() > 0.5, 

@@ -32,7 +32,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: true,
   isLoading: false,
   
-  login: async (email, password) => {
+  login: async (email) => {
     set({ isLoading: true });
     
     try {
@@ -59,7 +59,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     }
   },
   
-  register: async (email, password, role) => {
+  register: async (email: string, _password: string, role: 'estudiante' | 'instructor') => {
     set({ isLoading: true });
     
     try {

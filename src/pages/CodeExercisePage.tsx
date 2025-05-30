@@ -11,12 +11,13 @@ def calcular_gradiente(x, y):
     # Tu código aquí
     pass
 `);
-  const [output, setOutput] = useState(null);
+  type Feedback = { passed: number; total: number; feedback: string } | null;
+  const [feedback] = useState<Feedback>(null);
   
   const handleSubmit = () => {
     // Simular ejecución de código (en producción esto enviaría al backend)
     const isCorrect = Math.random() > 0.5;
-    const testResults = {
+    const testResults: Feedback = {
       passed: isCorrect ? 3 : Math.floor(Math.random() * 3),
       total: 3,
       feedback: isCorrect
@@ -24,7 +25,7 @@ def calcular_gradiente(x, y):
         : "Hay errores en tu solución. Revisa los tests fallidos."
     };
     
-    setOutput(testResults);
+    (testResults);
   };
 
   return (
@@ -55,7 +56,7 @@ def calcular_gradiente(x, y):
               height="100%"
               defaultLanguage="python"
               value={code}
-              onChange={setCode}
+              onChange={(value) => setCode(value || "")}
               theme="vs-dark"
               options={{
                 minimap: { enabled: false },
@@ -65,19 +66,19 @@ def calcular_gradiente(x, y):
           </div>
         </div>
         
-        {output && (
+        {feedback && (
           <div className="mb-6 p-4 rounded-lg bg-gray-50">
             <h3 className="text-lg font-medium mb-2">Resultado:</h3>
             <div className="mb-3">
               <div className="flex items-center">
                 <span className="font-medium">Tests pasados:</span>
                 <span className="ml-2">
-                  {output.passed}/{output.total}
+                  {feedback.passed}/{feedback.total}
                 </span>
               </div>
             </div>
-            <div className={`p-3 rounded-md ${output.passed === output.total ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
-              {output.feedback}
+            <div className={`p-3 rounded-md ${feedback.passed === feedback.total ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
+              {feedback.feedback}
             </div>
           </div>
         )}

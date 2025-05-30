@@ -15,7 +15,7 @@ def optimizar_funcion(x0, y0, alpha=0.01, iteraciones=100):
     pass
 `);
   const [analyticalSolution, setAnalyticalSolution] = useState('\\nabla f(x,y) = (2xy, x^2 + 2xy)');
-  const [output, setOutput] = useState(null);
+  const [feedback, setFeedback] = useState<{ testsPassed: number; totalTests: number; passed: boolean; feedback: string } | null>(null);
   const [step, setStep] = useState(1);
   
   const handleAnalyticalSubmit = () => {
@@ -26,9 +26,12 @@ def optimizar_funcion(x0, y0, alpha=0.01, iteraciones=100):
     
     if (isCorrect) {
       setStep(2);
+      setFeedback(null);
     } else {
-      setOutput({
+      setFeedback({
         passed: false,
+        testsPassed: 0,
+        totalTests: 0,
         feedback: "Tu solución analítica no es correcta. Revisa las derivadas parciales."
       });
     }
@@ -38,8 +41,7 @@ def optimizar_funcion(x0, y0, alpha=0.01, iteraciones=100):
     // Simular ejecución de código
     const testsPassed = Math.floor(Math.random() * 5) + 1;
     const isAllPassed = testsPassed === 5;
-    
-    setOutput({
+    setFeedback({
       passed: isAllPassed,
       testsPassed,
       totalTests: 5,
@@ -53,6 +55,7 @@ def optimizar_funcion(x0, y0, alpha=0.01, iteraciones=100):
       console.log("Reto completado con éxito");
     }
   };
+
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -123,7 +126,7 @@ def optimizar_funcion(x0, y0, alpha=0.01, iteraciones=100):
                 height="100%"
                 defaultLanguage="python"
                 value={code}
-                onChange={setCode}
+                onChange={(value) => setCode(value || "")}
                 theme="vs-dark"
                 options={{
                   minimap: { enabled: false },
@@ -143,21 +146,21 @@ def optimizar_funcion(x0, y0, alpha=0.01, iteraciones=100):
           </div>
         )}
         
-        {output && (
+        {feedback && (
           <div className="mt-6 p-4 rounded-lg bg-gray-50">
             <h3 className="text-lg font-medium mb-2">Resultado:</h3>
-            {output.testsPassed !== undefined && (
+            {feedback.testsPassed !== undefined && (
               <div className="mb-3">
                 <div className="flex items-center">
                   <span className="font-medium">Tests pasados:</span>
                   <span className="ml-2">
-                    {output.testsPassed}/{output.totalTests}
+                    {feedback.testsPassed}/{feedback.totalTests}
                   </span>
                 </div>
               </div>
             )}
-            <div className={`p-3 rounded-md ${output.passed ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
-              {output.feedback}
+            <div className={`p-3 rounded-md ${feedback.passed ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
+              {feedback.feedback}
             </div>
           </div>
         )}

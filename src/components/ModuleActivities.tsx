@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+
 import { useProgressStore, ACTIVITY_POINTS, MINIMUM_PASSING_SCORE } from '../store/progressStore';
 
 // Tipos de actividades y sus íconos
@@ -10,13 +9,15 @@ const ACTIVITY_ICONS = {
   quiz: '🧠'      // Cuestionario final
 };
 
-interface ModuleActivity {
+export interface ModuleActivity {
   id: string;
   title: string;
   type: 'lesson' | 'exercise' | 'code' | 'quiz';
   locked: boolean;
   completed: boolean;
   path?: string;
+  content?: string;
+  questions?: any[];
 }
 
 interface ModuleActivitiesProps {
@@ -27,7 +28,7 @@ interface ModuleActivitiesProps {
 }
 
 const ModuleActivities = ({ weekId, moduleId, activities, onActivityClick }: ModuleActivitiesProps) => {
-  const { completedActivities, getModuleScore, isModulePassed } = useProgressStore();
+  const { getModuleScore, isModulePassed } = useProgressStore();
   
   // Obtener puntuación actual del módulo
   const moduleScore = getModuleScore(Number(weekId), Number(moduleId));

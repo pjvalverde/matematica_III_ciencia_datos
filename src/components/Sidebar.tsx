@@ -1,9 +1,8 @@
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useProgressStore } from '../store/progressStore';
-import { useState } from 'react';
 
 // Datos simulados más completos para el contenido de las semanas
-const weeklyContent = {
+const weeklyContent: { [key: string]: { title: string; lessons: { id: string; title: string }[]; hasExercisesAnalytical: boolean; hasExercisesCode: boolean; hasChallenges: boolean } } = {
   '1': {
     title: 'Introducción y Derivadas Parciales',
     lessons: [
@@ -43,25 +42,26 @@ const moduleSequence = [
 
 const Sidebar = () => {
   const location = useLocation();
-  const params = useParams();
+  
   const { completedWeeks, completedLessons } = useProgressStore();
   
   // Datos simulados de semanas (en una app real vendrían de una API/store)
   const weeks = [
-    { id: 1, title: 'Introducción al Cálculo Multivariante' },
-    { id: 2, title: 'Vectores y Espacio Vectorial' },
-    { id: 3, title: 'Derivadas Parciales' },
-    { id: 4, title: 'Gradientes y Direccionales' },
-    { id: 5, title: 'Optimización' },
-    { id: 6, title: 'Integrales Múltiples' },
-    { id: 7, title: 'Teorema de Green y Stokes' },
-    { id: 8, title: 'Aplicaciones en Ciencia de Datos' },
-  ];
+  { id: 1, title: 'Introducción al Cálculo Multivariante' },
+  { id: 2, title: 'Vectores y Espacio Vectorial' },
+  { id: 3, title: 'Derivadas Parciales' },
+  { id: 4, title: 'Gradientes y Direccionales' },
+  { id: 5, title: 'Optimización' },
+  { id: 6, title: 'Integrales Múltiples' },
+  { id: 7, title: 'Teorema de Green y Stokes' },
+  { id: 8, title: 'Aplicaciones en Ciencia de Datos' }
+];
   
   // Verificar si una semana es accesible (completó la semana anterior o es la primera)
-  const isAccessible = (weekId) => {
-    if (weekId === 1) return true;
-    return completedWeeks.includes(weekId - 1);
+  const isAccessible = (weekId: string | number) => {
+    const weekNum = typeof weekId === 'string' ? parseInt(weekId, 10) : weekId;
+    if (weekNum === 1) return true;
+    return completedWeeks.includes(weekNum - 1);
   };
   
   // Verificar si estamos en una página de semana específica
@@ -74,7 +74,7 @@ const Sidebar = () => {
   const currentWeekData = isInWeekPage ? weeklyContent[currentWeekId] || null : null;
 
   // Verificar si un módulo está desbloqueado (para semana 1)
-  const isModuleUnlocked = (moduleIndex) => {
+  const isModuleUnlocked = (moduleIndex: number) => {
     // Si no estamos en la semana 1, aplicamos reglas diferentes
     if (!isWeek1) return true;
     
@@ -101,7 +101,7 @@ const Sidebar = () => {
   };
 
   // Verificar si un módulo está completado (para semana 1)
-  const isModuleCompleted = (moduleType, moduleId) => {
+  const isModuleCompleted = (moduleType: string, moduleId: string | null) => {
     if (moduleType === 'lesson') {
       return completedLessons.includes(`1:lesson-${moduleId}`);
     } else if (moduleType === 'exercises-analytical') {
@@ -134,7 +134,7 @@ const Sidebar = () => {
         <nav>
           <ul className="space-y-1">
             {/* Lecciones */}
-            {currentWeekData.lessons.map((lesson, index) => {
+            {currentWeekData.lessons.map((lesson: any) => {
               // Determinar si esta lección está desbloqueada
               const moduleIndex = moduleSequence.findIndex(m => m.type === 'lesson' && m.id === lesson.id);
               const isUnlocked = isModuleUnlocked(moduleIndex);
@@ -278,7 +278,7 @@ const Sidebar = () => {
                     : 'hover:bg-gray-200'}
                   ${!isAccessible(week.id) && 'opacity-50 cursor-not-allowed'}
                 `}
-                onClick={(e) => !isAccessible(week.id) && e.preventDefault()}
+                onClick={(e: React.MouseEvent<HTMLAnchorElement>) => !isAccessible(week.id) && e.preventDefault()}
               >
                 {week.title}
                 {completedWeeks.includes(week.id) && (

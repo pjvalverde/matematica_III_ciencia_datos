@@ -15,6 +15,7 @@
     "chart.js": "^4.4.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "firebase": "^11.8.1",
     "katex": "^0.16.9",
     "lucide-react": "^0.331.0",
     "prop-types": "^15.8.1",

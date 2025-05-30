@@ -15,18 +15,19 @@ interface ProgressState {
   completedWeeks: number[];
   completedLessons: string[]; // formato: "weekId:lessonId"
   completedActivities: {
-    [moduleId: string]: { // formato: "weekId:moduleId"
-      lessons: string[],
-      exercises: string[],
-      code: string[],
-      quiz: boolean,
-      totalScore: number
-    }
+    [moduleId: string]: {
+      lessons: string[];
+      exercises: string[];
+      code: string[];
+      quiz: boolean;
+      totalScore: number;
+      [key: string]: any; // <-- index signature para evitar error TS7053
+    };
   };
   badges: string[];
   xp: number;
   completeLesson: (weekId: number, lessonId: number, type?: string) => void;
-  completeActivity: (weekId: number, moduleId: number, activityType: string, activityId: string) => void;
+  completeActivity: (weekId: number, moduleId: number, activityType: 'lesson' | 'exercise' | 'code' | 'quiz', activityId: string) => void;
   completeWeek: (weekId: number) => void;
   completeQuiz: (weekId: number, moduleId: number, score: number) => void;
   earnXP: (amount: number) => void;
