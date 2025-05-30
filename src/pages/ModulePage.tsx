@@ -826,10 +826,16 @@ const ModulePage = () => {
       );
     }
     
+    // Renderizar lección interactiva si es tipo 'lesson'
+    if (activeActivity.type === 'lesson') {
+      // Se asume que LessonPage ya usa los parámetros de la lección actual
+      // Puedes pasar weekId y lessonId si LessonPage los requiere
+      return <LessonPage />;
+    }
+
     // Para otros tipos de actividades
     return (
       <div className="container mx-auto px-4 py-8">
-        
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-xl font-semibold mb-4">{activeActivity.title}</h2>
           {/* Contenido de la actividad */}
