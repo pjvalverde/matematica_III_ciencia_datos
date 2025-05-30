@@ -38,7 +38,7 @@ const modules = {
 
 import { useNavigate } from 'react-router-dom';
 const DashboardPage = () => {
-  const user = useAuthStore(state => state.user);
+
   const logout = useAuthStore(state => state.logout);
   const navigate = useNavigate();
   const { completedWeeks, badges, xp, isModulePassed } = useProgressStore();
