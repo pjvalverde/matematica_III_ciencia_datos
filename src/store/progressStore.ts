@@ -38,19 +38,11 @@ interface ProgressState {
 
 export const useProgressStore = create<ProgressState>((set, get) => ({
   // Datos iniciales para propósitos de demostración
-  completedWeeks: [1], // La semana 1 está completada
-  completedLessons: ['1:lesson-1'], // Solo la primera lección completada para probar el sistema de desbloqueo
-  completedActivities: {
-    '1:1': { // Semana 1, Módulo 1
-      lessons: ['1'],
-      exercises: [],
-      code: [],
-      quiz: false,
-      totalScore: 5 // Solo una lección completada (5 puntos)
-    }
-  },
-  badges: ['week-1', 'minimalista'], // Algunas medallas ganadas
-  xp: 250, // Puntos de experiencia acumulados
+  completedWeeks: [], // Ninguna semana completada
+  completedLessons: [], // Ninguna lección completada
+  completedActivities: {}, // Ninguna actividad completada
+  badges: [], // Ninguna medalla ganada
+  xp: 0, // Experiencia inicial en cero
   
   completeLesson: (weekId, lessonId, type = 'lesson') => set((state) => {
     // Crear la clave de lección según el tipo
