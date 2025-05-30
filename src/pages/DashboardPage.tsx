@@ -39,32 +39,6 @@ const DashboardPage = () => {
           Cerrar sesión
         </button>
       </div>
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow-sm border p-6">
-            <h3 className="text-lg font-semibold text-gray-700 mb-3">Progreso global</h3>
-            <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
-              <div className="bg-primary-600 h-2.5 rounded-full" style={{ width: `${totalProgress}%` }}></div>
-            </div>
-            <p className="text-lg font-bold">{totalProgress}% completado</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-sm border p-6">
-            <h3 className="text-lg font-semibold text-gray-700 mb-2">XP</h3>
-            <p className="text-3xl font-bold">{xp}</p>
-            <p className="text-sm text-gray-500 mt-1">puntos de experiencia</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-sm border p-6">
-            <h3 className="text-lg font-semibold text-gray-700 mb-2">Módulos</h3>
-            <p className="text-3xl font-bold">{completedWeeks.length}/{weeks.length}</p>
-            <p className="text-sm text-gray-500 mt-1">módulos completados</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-sm border p-6">
-            <h3 className="text-lg font-semibold text-gray-700 mb-2">Medallas</h3>
-            <p className="text-3xl font-bold">{badges.length}</p>
-            <p className="text-sm text-gray-500 mt-1">medallas ganadas</p>
-          </div>
-        </div>
-      </div>
       
       {/* Selección de semana, no mostrar actividades directamente */}
       <div className="bg-white rounded-lg shadow-sm border p-6 mb-8 flex flex-col items-center">
