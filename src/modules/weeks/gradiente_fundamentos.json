@@ -1,0 +1,8 @@
+{
+  "titulo": "Fundamentos - Gradiente y Derivadas Direccionales",
+  "preguntas": [
+    {"tipo": "teorica", "enunciado": "¿Qué es el gradiente de una función?"},
+    {"tipo": "teorica", "enunciado": "¿Cómo se interpreta la derivada direccional?"},
+    {"tipo": "reto", "enunciado": "Da un ejemplo de aplicación del gradiente en física."}
+  ]
+}

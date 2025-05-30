@@ -1,0 +1,10 @@
+{
+  "titulo": "Ejercicios - Gradiente y Derivadas Direccionales",
+  "ejercicios": [
+    "Calcula el gradiente de f(x, y) = x² + y².",
+    "¿Cuál es la derivada direccional de f(x, y) = xy en la dirección (1,1)?",
+    "Evalúa el gradiente en (1,2) para f(x, y) = x²y.",
+    "¿Para qué dirección es máxima la derivada direccional de f(x, y) = x + y?",
+    "¿Qué representa el gradiente en un campo de temperatura?"
+  ]
+}

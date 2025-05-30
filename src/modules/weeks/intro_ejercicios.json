@@ -1,0 +1,10 @@
+{
+  "titulo": "Ejercicios - Introducción al Cálculo Multivariante",
+  "ejercicios": [
+    "Determina el dominio de f(x, y) = x² + y².",
+    "Calcula el rango de f(x, y) = x - y.",
+    "Evalúa f(2,3) para f(x, y) = x²y.",
+    "¿Es f(x, y) = ln(xy) definida para x=0, y=2?",
+    "¿Para qué valores de x, y está definida f(x, y) = 1/(x²+y²)?"
+  ]
+}

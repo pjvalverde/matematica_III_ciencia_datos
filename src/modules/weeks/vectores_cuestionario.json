@@ -1,0 +1,13 @@
+{
+  "titulo": "Cuestionario Final - Vectores y Espacio Vectorial",
+  "preguntas": [
+    "Suma los vectores (1,2) y (3,4).",
+    "Calcula el módulo de (3,4).",
+    "¿Es {(1,0), (0,1)} una base de R²?",
+    "¿El conjunto de matrices 2x2 es un espacio vectorial?",
+    "Multiplica el vector (2, -1) por el escalar 3.",
+    "¿Qué es un vector en R² y R³?",
+    "¿Qué condiciones debe cumplir un conjunto para ser un espacio vectorial?",
+    "Da un ejemplo de combinación lineal de tres vectores en R³ que resulte en el vector cero."
+  ]
+}

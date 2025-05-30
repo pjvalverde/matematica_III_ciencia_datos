@@ -1,0 +1,5 @@
+{
+  "titulo": "Reto de Código - Vectores y Espacio Vectorial",
+  "enunciado": "Escribe una función que sume dos vectores de dos componentes.",
+  "codigo": "def suma_vectores(v1, v2):\n    return (v1[0] + v2[0], v1[1] + v2[1])\n\nprint(suma_vectores((1, 2), (3, 4)))"
+}

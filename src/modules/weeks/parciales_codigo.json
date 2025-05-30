@@ -1,0 +1,5 @@
+{
+  "titulo": "Reto de Código - Derivadas Parciales",
+  "enunciado": "Escribe una función que calcule la derivada parcial respecto a x de f(x, y) = x**2 * y + y**3 en un punto dado.",
+  "codigo": "def derivada_parcial_x(x, y):\n    return 2 * x * y\n\nprint(derivada_parcial_x(1, 2))"
+}

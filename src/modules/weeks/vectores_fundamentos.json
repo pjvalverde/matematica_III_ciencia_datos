@@ -1,0 +1,8 @@
+{
+  "titulo": "Fundamentos - Vectores y Espacio Vectorial",
+  "preguntas": [
+    {"tipo": "teorica", "enunciado": "¿Qué es un vector en R² y R³?"},
+    {"tipo": "teorica", "enunciado": "¿Qué condiciones debe cumplir un conjunto para ser un espacio vectorial?"},
+    {"tipo": "reto", "enunciado": "Da un ejemplo de un espacio vectorial distinto a R² o R³."}
+  ]
+}

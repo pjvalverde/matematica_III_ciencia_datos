@@ -1,0 +1,8 @@
+{
+  "titulo": "Fundamentos - Introducción al Cálculo Multivariante",
+  "preguntas": [
+    {"tipo": "teorica", "enunciado": "¿Qué es una función multivariable?"},
+    {"tipo": "teorica", "enunciado": "Explica la diferencia entre dominio y rango en funciones de varias variables."},
+    {"tipo": "reto", "enunciado": "Da un ejemplo real donde se use una función de dos variables en la vida cotidiana."}
+  ]
+}

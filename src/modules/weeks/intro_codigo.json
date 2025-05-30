@@ -1,0 +1,5 @@
+{
+  "titulo": "Reto de Código - Introducción al Cálculo Multivariante",
+  "enunciado": "Escribe una función que reciba dos números y devuelva su suma y producto.",
+  "codigo": "def suma_producto(x, y):\n    return x + y, x * y\n\nprint(suma_producto(2, 3))"
+}

@@ -1,0 +1,8 @@
+{
+  "titulo": "Fundamentos - Derivadas Parciales",
+  "preguntas": [
+    {"tipo": "teorica", "enunciado": "¿Qué es una derivada parcial?"},
+    {"tipo": "teorica", "enunciado": "¿Cómo se interpreta geométricamente la derivada parcial?"},
+    {"tipo": "reto", "enunciado": "Da un ejemplo de función y calcula sus derivadas parciales en (1,1)."}
+  ]
+}

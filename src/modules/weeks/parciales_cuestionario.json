@@ -1,0 +1,13 @@
+{
+  "titulo": "Cuestionario Final - Derivadas Parciales",
+  "preguntas": [
+    "Calcula ∂f/∂x para f(x, y) = x²y + y³.",
+    "Calcula ∂f/∂y para f(x, y) = e^{xy}.",
+    "Evalúa ∂f/∂x en (0,1) para f(x, y) = x + y².",
+    "¿Cuál es la derivada parcial de f(x, y) = sin(xy) respecto a y?",
+    "¿Para qué valores de x, y es continua la derivada parcial de f(x, y) = ln(x + y)?",
+    "¿Qué es una derivada parcial?",
+    "¿Cómo se interpreta geométricamente la derivada parcial?",
+    "Encuentra todos los puntos críticos de f(x, y) = x² + y² - 2x - 4y."
+  ]
+}

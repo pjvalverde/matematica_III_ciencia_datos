@@ -1,0 +1,10 @@
+{
+  "titulo": "Ejercicios - Vectores y Espacio Vectorial",
+  "ejercicios": [
+    "Suma los vectores (1,2) y (3,4).",
+    "Calcula el módulo de (3,4).",
+    "¿Es {(1,0), (0,1)} una base de R²?",
+    "¿El conjunto de matrices 2x2 es un espacio vectorial?",
+    "Multiplica el vector (2, -1) por el escalar 3."
+  ]
+}
