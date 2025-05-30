@@ -7,57 +7,57 @@ import { getFirestore, doc, setDoc } from 'firebase/firestore';
 const AnalyticalExercisePage = () => {
   const { weekId, exerciseId } = useParams();
   const questions = [
-    {
-      question: '¿Cuál es el gradiente de f(x, y) = x²y + xy²?',
-      options: [
-        '(2xy + y², x² + 2xy)',
-        '(2x + y, 2y + x)',
-        '(x² + y², x² + y²)',
-        '(xy, xy)'
-      ],
-      correct: '(2xy + y², x² + 2xy)'
-    },
-    {
-      question: '¿Qué representa el gradiente de una función escalar?',
-      options: [
-        'La dirección de máximo crecimiento',
-        'El valor mínimo de la función',
-        'La integral de la función',
-        'El punto crítico'
-      ],
-      correct: 'La dirección de máximo crecimiento'
-    },
-    {
-      question: '¿Cuál es el gradiente de f(x, y) = x³ + y³ en (1, 2)?',
-      options: [
-        '(3, 12)',
-        '(1, 2)',
-        '(3, 6)',
-        '(2, 3)'
-      ],
-      correct: '(3, 12)'
-    },
-    {
-      question: '¿Para qué valores de (x, y) es nulo el gradiente de f(x, y) = x² + y²?',
-      options: [
-        '(0, 0)',
-        '(1, 1)',
-        '(1, 0)',
-        '(0, 1)'
-      ],
-      correct: '(0, 0)'
-    },
-    {
-      question: '¿Cuál es el significado geométrico del gradiente?',
-      options: [
-        'Vector perpendicular a las curvas de nivel',
-        'El área bajo la curva',
-        'El valor máximo de la función',
-        'El punto de inflexión'
-      ],
-      correct: 'Vector perpendicular a las curvas de nivel'
-    }
-  ];
+  {
+    question: 'Sea f(x, y) = ln(xy). ¿Cuál es el dominio de f?',
+    options: [
+      'x > 0, y > 0',
+      'x ≠ 0, y ≠ 0',
+      'x ≥ 0, y ≥ 0',
+      'x < 0, y < 0',
+    ],
+    correct: 'x > 0, y > 0',
+  },
+  {
+    question: '¿Cuál es el valor de la derivada parcial ∂/∂y de f(x, y) = x²y³ en (1,2)?',
+    options: [
+      '12',
+      '6',
+      '8',
+      '4',
+    ],
+    correct: '12',
+  },
+  {
+    question: 'Sea F(x, y) = (y, x). ¿Cuál es el rotacional de F?',
+    options: [
+      '0',
+      '2',
+      '-2',
+      '1',
+    ],
+    correct: '-2',
+  },
+  {
+    question: '¿Cuál es el valor de la integral doble ∫∫_D (x + y) dA sobre el cuadrado D: 0 ≤ x ≤ 1, 0 ≤ y ≤ 1?',
+    options: [
+      '1',
+      '2',
+      '0.5',
+      '4',
+    ],
+    correct: '1',
+  },
+  {
+    question: '¿Cuál de las siguientes afirmaciones es verdadera sobre el gradiente?',
+    options: [
+      'Siempre apunta en la dirección de máximo crecimiento de la función',
+      'Siempre es perpendicular al eje x',
+      'Es igual a la divergencia',
+      'No existe para funciones continuas',
+    ],
+    correct: 'Siempre apunta en la dirección de máximo crecimiento de la función',
+  },
+];
   const [answers, setAnswers] = useState<(string | null)[]>(Array(5).fill(null));
   const [showFeedback, setShowFeedback] = useState(false);
   const [completed, setCompleted] = useState(false);

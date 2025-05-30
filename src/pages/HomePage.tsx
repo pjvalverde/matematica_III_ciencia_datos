@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useProgressStore } from '../store/progressStore';
+import { useAuthStore } from '../store/authStore';
 
 const HomePage = () => {
   const { badges, xp, completedWeeks } = useProgressStore();
+  const { isAuthenticated } = useAuthStore();
 
   return (
     <div className="p-8">
@@ -100,16 +102,39 @@ const HomePage = () => {
         )}
       </div>
       
-      <div className="mb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Link to="/login" className="bg-blue-500 text-white p-4 rounded-md text-center hover:bg-blue-600">
-            Iniciar Sesión
-          </Link>
-          <Link to="/register" className="bg-green-500 text-white p-4 rounded-md text-center hover:bg-green-600">
-            Registrarse
-          </Link>
+      {/* Acceso a semanas solo si autenticado */}
+      {isAuthenticated ? (
+        <div className="mb-8 flex flex-col items-center">
+          <h2 className="text-2xl font-bold mb-4">Acceso a Semanas</h2>
+          <div className="w-full max-w-md flex flex-col gap-4">
+            {/* Semana 1 siempre disponible */}
+            <Link
+              to="/semana/1"
+              className="block w-full p-6 text-center rounded-lg bg-blue-600 text-white text-xl font-semibold shadow hover:bg-blue-700 transition"
+            >
+              Semana 1: Introducción al Cálculo Multivariante
+            </Link>
+            {/* Semana 2 bloqueada visualmente */}
+            <button
+              className="block w-full p-6 text-center rounded-lg bg-gray-300 text-gray-500 text-xl font-semibold cursor-not-allowed"
+              disabled
+            >
+              Semana 2: Optimización (Completa Semana 1 para desbloquear)
+            </button>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="mb-8 flex flex-col items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Link to="/login" className="bg-blue-500 text-white p-4 rounded-md text-center hover:bg-blue-600">
+              Iniciar Sesión
+            </Link>
+            <Link to="/register" className="bg-green-500 text-white p-4 rounded-md text-center hover:bg-green-600">
+              Registrarse
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

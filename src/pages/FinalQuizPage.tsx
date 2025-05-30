@@ -4,118 +4,106 @@ import { getFirestore, doc, setDoc } from 'firebase/firestore';
 import { useParams, Link } from 'react-router-dom';
 
 const questions = [
-  // Teoría
   {
-    question: '¿Qué estudia el cálculo multivariante?',
+    question: 'Sea f(x, y) = e^{x^2 + y^2}. ¿Cuál es el gradiente ∇f?',
     options: [
-      'Funciones de una variable',
-      'Funciones de varias variables',
-      'Números complejos',
-      'Ecuaciones diferenciales'
+      '(2xe^{x^2+y^2}, 2ye^{x^2+y^2})',
+      '(e^{x^2+y^2}, e^{x^2+y^2})',
+      '(2x, 2y)',
+      '(x^2, y^2)',
     ],
-    correct: 'Funciones de varias variables'
+    correct: '(2xe^{x^2+y^2}, 2ye^{x^2+y^2})',
   },
   {
-    question: '¿Qué es un gradiente?',
+    question: '¿Cuál es el valor de la integral doble ∫∫_D x dA, donde D es el cuadrado 0 ≤ x ≤ 1, 0 ≤ y ≤ 1?',
     options: [
-      'Un número real',
-      'Una integral',
-      'Un vector de derivadas parciales',
-      'Una constante'
+      '0.5',
+      '1',
+      '2',
+      '0',
     ],
-    correct: 'Un vector de derivadas parciales'
+    correct: '0.5',
   },
   {
-    question: '¿Cuál es el significado geométrico del gradiente?',
+    question: 'Si F(x, y) = (y, -x), ¿cuál es el rotacional de F?',
     options: [
-      'Área bajo la curva',
-      'Dirección de máximo crecimiento',
-      'Valor mínimo de la función',
-      'Punto de inflexión'
+      '-2',
+      '0',
+      '2',
+      '1',
     ],
-    correct: 'Dirección de máximo crecimiento'
-  },
-  // Ejercicios
-  {
-    question: '¿Cuál es el gradiente de f(x, y) = x²y + xy² en (1, 1)?',
-    options: [
-      '(3, 3)',
-      '(2, 2)',
-      '(4, 4)',
-      '(1, 1)'
-    ],
-    correct: '(4, 4)'
+    correct: '-2',
   },
   {
-    question: '¿Para qué valores (x, y) es nulo el gradiente de f(x, y) = x² + y²?',
+    question: '¿Cuál de las siguientes funciones es diferenciable en todo R²?',
+    options: [
+      'f(x, y) = x^2 + y^2',
+      'f(x, y) = |x| + |y|',
+      'f(x, y) = 1/(x^2 + y^2)',
+      'f(x, y) = ln(xy)',
+    ],
+    correct: 'f(x, y) = x^2 + y^2',
+  },
+  {
+    question: '¿Para qué valores de (x, y) es nulo el gradiente de f(x, y) = x^2 + y^2?',
     options: [
       '(0, 0)',
       '(1, 1)',
       '(1, 0)',
-      '(0, 1)'
+      '(0, 1)',
     ],
-    correct: '(0, 0)'
+    correct: '(0, 0)',
   },
   {
-    question: '¿Cuál es el gradiente de f(x, y) = x³ + y³ en (2, 1)?',
+    question: '¿Cuál es el valor de la derivada parcial ∂/∂x de f(x, y) = x^2y + y^2 en (2, 1)?',
     options: [
-      '(12, 3)',
-      '(6, 3)',
-      '(3, 6)',
-      '(2, 1)'
-    ],
-    correct: '(12, 3)'
-  },
-  {
-    question: 'Si f(x, y) = x²y, ¿cuál es la derivada parcial respecto a x?',
-    options: [
-      '2xy',
-      'x²',
-      'y',
-      'xy²'
-    ],
-    correct: '2xy'
-  },
-  {
-    question: '¿Cuál es el dominio de f(x, y) = 1/(x+y)?',
-    options: [
-      'x+y ≠ 0',
-      'x ≠ 0',
-      'y ≠ 0',
-      'x ≠ y'
-    ],
-    correct: 'x+y ≠ 0'
-  },
-  {
-    question: '¿Cuál es el valor de la derivada parcial de f(x, y) = x² + y³ respecto a y en (1, 2)?',
-    options: [
-      '12',
-      '6',
       '4',
-      '3'
+      '2',
+      '1',
+      '5',
     ],
-    correct: '12'
+    correct: '4',
   },
   {
-    question: '¿Cuál es el gradiente de f(x, y) = x² + y² en (1, 2)?',
+    question: '¿Cuál es el dominio de la función f(x, y) = ln(x-y)?',
     options: [
-      '(2, 4)',
-      '(1, 2)',
-      '(2, 2)',
-      '(4, 1)'
+      'x > y',
+      'x < y',
+      'x ≥ y',
+      'x ≠ y',
     ],
-    correct: '(2, 4)'
+    correct: 'x > y',
   },
   {
-    question: '¿Qué representa la notación f(x, y)?',
+    question: 'Sea F(x, y) = (x^2, y^2). ¿Cuál es la divergencia de F?',
     options: [
-      'Una función de una variable',
-      'Una función de dos variables',
-      'Una constante',
-      'Un número primo'
+      '2x + 2y',
+      'x^2 + y^2',
+      '2x',
+      '2y',
     ],
-    correct: 'Una función de dos variables'
-  }
+    correct: '2x + 2y',
+  },
+  {
+    question: '¿Cuál es el significado geométrico del gradiente?',
+    options: [
+      'Vector perpendicular a las curvas de nivel',
+      'Área bajo la curva',
+      'Valor máximo de la función',
+      'El punto de inflexión',
+    ],
+    correct: 'Vector perpendicular a las curvas de nivel',
+  },
+  {
+    question: '¿Cuál de las siguientes afirmaciones es verdadera sobre campos conservativos?',
+    options: [
+      'Su rotacional es siempre cero',
+      'Su divergente es siempre cero',
+      'No existen en R²',
+      'Siempre son perpendiculares a las curvas de nivel',
+    ],
+    correct: 'Su rotacional es siempre cero',
+  },
 ];
 
 const FinalQuizPage = () => {

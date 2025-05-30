@@ -5,6 +5,7 @@ import { useProgressStore } from '../store/progressStore';
 
 
 // Datos simulados de módulos
+// Solo módulos de la semana activa (ejemplo: semana 1)
 const modules = {
   '1': [
     {
@@ -26,13 +27,6 @@ const modules = {
       id: '4',
       title: 'Gradiente y Derivadas Direccionales',
       description: 'Aplicaciones del gradiente en el análisis de funciones multivariantes'
-    }
-  ],
-  '2': [
-    {
-      id: '1',
-      title: 'Optimización en Varias Variables',
-      description: 'Encontrar máximos y mínimos de funciones multivariantes'
     }
   ]
 };

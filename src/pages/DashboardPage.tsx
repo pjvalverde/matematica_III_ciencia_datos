@@ -1,47 +1,14 @@
 
 import { useAuthStore } from '../store/authStore';
 import { useProgressStore } from '../store/progressStore';
-import ModuleProgress from '../components/ModuleProgress';
 
-// Datos simulados de módulos
-const modules = {
-  '1': [
-    {
-      id: '1',
-      title: 'Introducción al Cálculo Multivariante',
-      description: 'Fundamentos y conceptos básicos del cálculo multivariante'
-    },
-    {
-      id: '2',
-      title: 'Vectores y Espacio Vectorial',
-      description: 'Conceptos y aplicaciones de los vectores en el cálculo multivariante'
-    },
-    {
-      id: '3',
-      title: 'Derivadas Parciales',
-      description: 'Conceptos y aplicaciones de las derivadas parciales'
-    },
-    {
-      id: '4',
-      title: 'Gradiente y Derivadas Direccionales',
-      description: 'Aplicaciones del gradiente en el análisis de funciones multivariantes'
-    }
-  ],
-  '2': [
-    {
-      id: '1',
-      title: 'Optimización en Varias Variables',
-      description: 'Encontrar máximos y mínimos de funciones multivariantes'
-    }
-  ]
-};
 
 import { useNavigate } from 'react-router-dom';
 const DashboardPage = () => {
 
   const logout = useAuthStore(state => state.logout);
   const navigate = useNavigate();
-  const { completedWeeks, badges, xp, isModulePassed } = useProgressStore();
+  const { completedWeeks, badges, xp } = useProgressStore();
   
   // Datos simulados de semanas (en una app real vendrían de una API/store)
   const weeks = [
@@ -55,14 +22,6 @@ const DashboardPage = () => {
     { id: 8, title: 'Aplicaciones en Ciencia de Datos' },
   ];
   
-  // Verificar si un módulo de la semana 1 es accesible
-  const isModuleAccessible = (moduleId: string) => {
-    if (moduleId === '1') return true;
-    
-    // Para los módulos siguientes, verificar si el módulo anterior está aprobado
-    const prevModuleId = String(Number(moduleId) - 1);
-    return isModulePassed(1, Number(prevModuleId));
-  };
 
   // Calcular progreso global
   const totalProgress = Math.round((completedWeeks.length / weeks.length) * 100);
@@ -107,55 +66,30 @@ const DashboardPage = () => {
         </div>
       </div>
       
-      {/* Nuevos módulos de la semana 1 */}
-      <div className="bg-white rounded-lg shadow-sm border p-6 mb-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Módulos de Aprendizaje</h2>
-        
-        <div className="mb-8">
-          <h3 className="text-xl font-bold text-gray-800 mb-4">Semana 1: Introducción al Cálculo Multivariante</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {modules['1'].map((module) => {
-              const moduleAccessible = isModuleAccessible(module.id);
-              
-              if (!moduleAccessible) {
-                return (
-                  <div key={module.id} className="bg-gray-100 rounded-lg p-5 opacity-70">
-                    <h3 className="text-lg font-semibold mb-1">{module.title}</h3>
-                    <p className="text-gray-600 text-sm mb-4">{module.description}</p>
-                    <div className="flex items-center justify-center p-3 bg-gray-200 text-gray-500 rounded-md">
-                      <span className="mr-2">🔒</span> Módulo bloqueado
-                    </div>
-                  </div>
-                );
-              }
-              
-              return (
-                <ModuleProgress 
-                  key={module.id}
-                  weekId="1"
-                  moduleId={module.id}
-                  title={module.title}
-                  description={module.description}
-                />
-              );
-            })}
-          </div>
-        </div>
-        
-        <div className="mb-4">
-          <h3 className="text-xl font-bold text-gray-800 mb-4">Próximamente</h3>
-          <div className="bg-gray-50 border border-dashed border-gray-300 rounded-lg p-5 text-center">
-            <h4 className="text-lg font-medium text-gray-500 mb-2">Más módulos en desarrollo</h4>
-            <p className="text-gray-500">Estamos preparando más contenido educativo para mejorar tu aprendizaje.</p>
-          </div>
+      {/* Selección de semana, no mostrar actividades directamente */}
+      <div className="bg-white rounded-lg shadow-sm border p-6 mb-8 flex flex-col items-center">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Acceso a Semanas</h2>
+        <div className="w-full max-w-md flex flex-col gap-4">
+          {/* Semana 1 siempre disponible */}
+          <button
+            className="block w-full p-6 text-center rounded-lg bg-blue-600 text-white text-xl font-semibold shadow hover:bg-blue-700 transition"
+            onClick={() => navigate('/semana/1')}
+          >
+            Semana 1: Introducción al Cálculo Multivariante
+          </button>
+          {/* Semana 2 bloqueada visualmente */}
+          <button
+            className="block w-full p-6 text-center rounded-lg bg-gray-300 text-gray-500 text-xl font-semibold cursor-not-allowed"
+            disabled
+          >
+            Semana 2: Optimización (Completa Semana 1 para desbloquear)
+          </button>
         </div>
       </div>
-      
       {/* Sección de badges */}
       {badges.length > 0 && (
         <div className="bg-white rounded-lg shadow-sm border p-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Tus medallas</h2>
-          
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {badges.map((badge) => (
               <div key={badge} className="bg-gray-50 border rounded-lg p-4 flex flex-col items-center">

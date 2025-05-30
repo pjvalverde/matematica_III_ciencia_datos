@@ -17,18 +17,11 @@ interface AuthState {
   logout: () => void;
 }
 
-// Usuario simulado para propósitos de desarrollo
-const mockUser: User = {
-  id: '1',
-  email: 'estudiante@ejemplo.com',
-  name: 'Estudiante de Prueba',
-  xp: 250
-};
 
 export const useAuthStore = create<AuthState>((set) => ({
-  // Para propósitos de demo, empezamos con un usuario ya autenticado
-  user: mockUser,
-  isAuthenticated: true,
+  // Estado inicial: no autenticado
+  user: null,
+  isAuthenticated: false,
   isLoading: false,
   
   login: async (email) => {

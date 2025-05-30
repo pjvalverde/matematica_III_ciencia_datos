@@ -3,6 +3,7 @@ import type { ModuleActivity } from '../components/ModuleActivities';
 import { useParams, useNavigate } from 'react-router-dom';
 import ModuleActivities from '../components/ModuleActivities';
 import ModuleQuiz from '../components/ModuleQuiz';
+import LessonPage from './LessonPage';
 import { useProgressStore, MINIMUM_PASSING_SCORE } from '../store/progressStore';
 
 // Datos simulados para módulos

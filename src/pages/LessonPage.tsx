@@ -1,8 +1,17 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 
+import { useNavigate } from 'react-router-dom';
+
 const LessonPage = () => {
   const { weekId, lessonId } = useParams();
+  const navigate = useNavigate();
+
+  // Función para marcar como completada y regresar al módulo
+  function handleLessonComplete() {
+    // Opcional: podrías guardar el progreso en Firebase aquí si lo deseas
+    navigate(`/modulo/${weekId}`);
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -17,53 +26,64 @@ const LessonPage = () => {
       
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-xl font-semibold mb-4">Quiz de comprensión</h2>
-        <LessonQuiz />
+        <LessonQuiz onComplete={handleLessonComplete} />
       </div>
     </div>
   );
 };
 
-function LessonQuiz() {
+function LessonQuiz({ onComplete }: { onComplete: () => void }) {
+  // Preguntas de dificultad intermedia/alta
   const questions = [
     {
-      question: '¿Cuál es el resultado de 2 + 2?',
-      options: ['3', '4', '5', '6'],
-      correct: '4',
-    },
-    {
-      question: '¿Cuál es la derivada de x^2?',
-      options: ['x', '2x', 'x^2', '2'],
-      correct: '2x',
-    },
-    {
-      question: '¿Qué es un vector?',
+      question: 'Sea f(x, y) = x²y + y³. ¿Cuál es la derivada parcial ∂f/∂x?',
       options: [
-        'Un número real',
-        'Una función',
-        'Una magnitud con dirección',
-        'Una constante',
+        '2xy',
+        '2xy + y³',
+        '2xy + y',
+        'y³',
       ],
-      correct: 'Una magnitud con dirección',
+      correct: '2xy',
     },
     {
-      question: '¿Cuál es el dominio de f(x) = 1/x?',
+      question: '¿Cuál es el valor del determinante Jacobiano de la transformación polar (x = r cosθ, y = r sinθ)?',
       options: [
-        'x ≠ 0',
-        'x > 0',
-        'x < 0',
-        'x = 0',
+        'r',
+        '1',
+        'r²',
+        'cosθ',
       ],
-      correct: 'x ≠ 0',
+      correct: 'r',
     },
     {
-      question: '¿Qué representa la notación f(x, y)?',
+      question: '¿En qué punto (x, y) la función f(x, y) = x² + y² alcanza su mínimo global?',
       options: [
-        'Una función de una variable',
-        'Una función de dos variables',
-        'Una constante',
-        'Un número primo',
+        '(1,1)',
+        '(0,0)',
+        '(2,2)',
+        '(x,y) tal que x=y',
       ],
-      correct: 'Una función de dos variables',
+      correct: '(0,0)',
+    },
+    {
+      question: 'Sea F(x, y) = (x²y, xy²). ¿Cuál es el divergente de F?',
+      options: [
+        '2xy + 2y',
+        '2x + 2y',
+        '2xy',
+        'x² + y²',
+      ],
+      correct: '2x + 2y',
+    },
+    {
+      question: '¿Cuál de las siguientes afirmaciones es verdadera sobre campos conservativos?',
+      options: [
+        'Su rotacional es siempre cero',
+        'Su divergente es siempre cero',
+        'No existen en R²',
+        'Siempre son perpendiculares a las curvas de nivel',
+      ],
+      correct: 'Su rotacional es siempre cero',
     },
   ];
 
@@ -77,6 +97,10 @@ function LessonQuiz() {
     newAns[qIdx] = option;
     setAnswers(newAns);
     setShowFeedback(true);
+  }
+
+  function handleComplete() {
+    if (completed && onComplete) onComplete();
   }
 
   return (
@@ -106,7 +130,7 @@ function LessonQuiz() {
       <button
         className={`mt-4 px-4 py-2 rounded font-bold ${completed ? 'bg-green-600 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
         disabled={!completed}
-        onClick={() => alert('¡Lección marcada como completada!')}
+        onClick={handleComplete}
       >
         {completed ? 'Marcar como completada' : 'Responde correctamente al menos 4 de 5'}
       </button>
