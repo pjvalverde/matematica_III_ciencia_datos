@@ -4,7 +4,7 @@ interface User {
   id: string;
   email: string;
   name: string;
-  role: 'estudiante' | 'instructor';
+
   xp: number;
 }
 
@@ -13,7 +13,7 @@ interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, role: 'estudiante' | 'instructor') => Promise<void>;
+  register: (email: string, password: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -22,7 +22,6 @@ const mockUser: User = {
   id: '1',
   email: 'estudiante@ejemplo.com',
   name: 'Estudiante de Prueba',
-  role: 'estudiante',
   xp: 250
 };
 
@@ -44,7 +43,6 @@ export const useAuthStore = create<AuthState>((set) => ({
         id: '1',
         email,
         name: email.split('@')[0],
-        role: 'estudiante' as const,
         xp: 0
       };
       
@@ -59,7 +57,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     }
   },
   
-  register: async (email: string, _password: string, role: 'estudiante' | 'instructor') => {
+  register: async (email: string, password: string) => {
     set({ isLoading: true });
     
     try {
@@ -70,7 +68,6 @@ export const useAuthStore = create<AuthState>((set) => ({
         id: '1',
         email,
         name: email.split('@')[0],
-        role,
         xp: 0
       };
       

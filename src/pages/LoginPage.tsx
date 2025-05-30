@@ -12,7 +12,7 @@ const LoginPage = ({ isRegister = false }: LoginPageProps) => {
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState<'estudiante' | 'instructor'>('estudiante');
+
   const [error, setError] = useState<string | null>(null);
   
   const handleSubmit = async (e: React.FormEvent) => {
@@ -21,7 +21,7 @@ const LoginPage = ({ isRegister = false }: LoginPageProps) => {
     
     try {
       if (isRegister) {
-        await register(email, password, role);
+        await register(email, password);
       } else {
         await login(email, password);
       }
@@ -92,24 +92,6 @@ const LoginPage = ({ isRegister = false }: LoginPageProps) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            
-            {isRegister && (
-              <div>
-                <label htmlFor="role" className="sr-only">
-                  Rol
-                </label>
-                <select
-                  id="role"
-                  name="role"
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
-                  value={role}
-                  onChange={(e) => setRole(e.target.value as 'estudiante' | 'instructor')}
-                >
-                  <option value="estudiante">Estudiante</option>
-                  <option value="instructor">Instructor</option>
-                </select>
-              </div>
-            )}
           </div>
           
           <div>
