@@ -1,10 +1,7 @@
 
 import { Link, useLocation } from 'react-router-dom';
-import { useAuthStore } from '../store/authStore';
 
 const Navbar = () => {
-  const user = useAuthStore(state => state.user);
-  const logout = useAuthStore(state => state.logout);
   const location = useLocation();
   
   
