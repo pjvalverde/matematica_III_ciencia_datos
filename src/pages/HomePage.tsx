@@ -7,6 +7,10 @@ const HomePage = () => {
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold mb-6">Cálculo Multivariante - Página de Inicio</h1>
+<div className="mb-8 flex flex-col items-center">
+  <span className="text-base text-gray-700 mb-2">¿Ya tienes una cuenta?</span>
+  <a href="/login" className="inline-block px-4 py-2 bg-blue-600 text-black font-semibold rounded hover:bg-blue-700">Inicia sesión aquí</a>
+</div>
       
       {/* Logros del estudiante */}
       <div className="mb-8 bg-white rounded-lg shadow-sm border p-6">

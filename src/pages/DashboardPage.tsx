@@ -36,8 +36,11 @@ const modules = {
   ]
 };
 
+import { useNavigate } from 'react-router-dom';
 const DashboardPage = () => {
   const user = useAuthStore(state => state.user);
+  const logout = useAuthStore(state => state.logout);
+  const navigate = useNavigate();
   const { completedWeeks, badges, xp, isModulePassed } = useProgressStore();
   
   // Datos simulados de semanas (en una app real vendrían de una API/store)
@@ -65,15 +68,19 @@ const DashboardPage = () => {
   const totalProgress = Math.round((completedWeeks.length / weeks.length) * 100);
   
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Bienvenido, {user?.name}</h1>
-        <p className="text-gray-600">Continúa tu viaje de aprendizaje en cálculo multivariante.</p>
+    <div className="p-8">
+      <div className="flex justify-end">
+        <button
+          className="px-4 py-2 bg-blue-600 text-black font-semibold rounded hover:bg-blue-700"
+          onClick={() => {
+            logout();
+            navigate('/');
+          }}
+        >
+          Cerrar sesión
+        </button>
       </div>
-      
-      {/* Panel de progreso y estadísticas */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white rounded-lg shadow-sm border p-6">
+      <div className="container mx-auto px-4 py-8">
           <h3 className="text-lg font-semibold text-gray-700 mb-3">Progreso global</h3>
           <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
             <div className="bg-primary-600 h-2.5 rounded-full" style={{ width: `${totalProgress}%` }}></div>
