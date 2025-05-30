@@ -116,7 +116,7 @@ const LoginPage = ({ isRegister = false }: LoginPageProps) => {
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-primary-600 text-sm font-medium rounded-md text-black bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:bg-primary-600 disabled:border-primary-600 disabled:text-black disabled:opacity-100"
+              className="group relative w-full flex justify-center py-2 px-4 border border-blue-600 text-sm font-medium rounded-md text-black bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-blue-600 disabled:border-blue-600 disabled:text-black disabled:opacity-100"
             >
               {isLoading ? (
                 <span className="flex items-center">
