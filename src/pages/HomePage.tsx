@@ -12,16 +12,18 @@ const HomePage = () => {
       <div className="mb-8 bg-white rounded-lg shadow-sm border p-6">
         <h2 className="text-xl font-semibold mb-4">Logros del Estudiante</h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          {/* Experiencia: siempre visible */}
-          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 flex items-center justify-between shadow-md">
-            <div>
-              <h3 className="text-lg font-semibold text-indigo-700">Experiencia</h3>
-              <p className="text-3xl font-bold text-indigo-600">{xp} XP</p>
+          {/* Experiencia: solo si xp > 0 */}
+          {xp > 0 && (
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 flex items-center justify-between shadow-md">
+              <div>
+                <h3 className="text-lg font-semibold text-indigo-700">Experiencia</h3>
+                <p className="text-3xl font-bold text-indigo-600">{xp} XP</p>
+              </div>
+              <div className="bg-indigo-100 p-3 rounded-full text-indigo-600 text-2xl">
+                ⭐
+              </div>
             </div>
-            <div className="bg-indigo-100 p-3 rounded-full text-indigo-600 text-2xl">
-              ⭐
-            </div>
-          </div>
+          )}
           {/* Nivel: solo si el usuario aprobó alguna semana */}
           {completedWeeks && completedWeeks.length > 0 && (
             <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-4 flex items-center justify-between shadow-md">
