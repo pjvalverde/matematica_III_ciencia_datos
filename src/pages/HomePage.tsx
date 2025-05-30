@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useProgressStore } from '../store/progressStore';
 
 const HomePage = () => {
-  const { badges, xp } = useProgressStore();
+  const { badges, xp, completedWeeks } = useProgressStore();
 
   return (
     <div className="p-8">
@@ -11,8 +11,9 @@ const HomePage = () => {
       {/* Logros del estudiante */}
       <div className="mb-8 bg-white rounded-lg shadow-sm border p-6">
         <h2 className="text-xl font-semibold mb-4">Logros del Estudiante</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 flex items-center justify-between">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          {/* Experiencia: siempre visible */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 flex items-center justify-between shadow-md">
             <div>
               <h3 className="text-lg font-semibold text-indigo-700">Experiencia</h3>
               <p className="text-3xl font-bold text-indigo-600">{xp} XP</p>
@@ -21,26 +22,47 @@ const HomePage = () => {
               ⭐
             </div>
           </div>
-          
-          <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 flex items-center justify-between">
-            <div>
-              <h3 className="text-lg font-semibold text-emerald-700">Medallas</h3>
-              <p className="text-3xl font-bold text-emerald-600">{badges.length}</p>
+          {/* Nivel: solo si el usuario aprobó alguna semana */}
+          {completedWeeks && completedWeeks.length > 0 && (
+            <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-4 flex items-center justify-between shadow-md">
+              <div>
+                <h3 className="text-lg font-semibold text-orange-700">Nivel</h3>
+                <p className="text-3xl font-bold text-orange-600">{completedWeeks.length}</p>
+                <span className="text-xs text-orange-500">Semanas aprobadas</span>
+              </div>
+              <div className="bg-orange-100 p-3 rounded-full text-orange-600 text-2xl">
+                🔥
+              </div>
             </div>
-            <div className="bg-emerald-100 p-3 rounded-full text-emerald-600 text-2xl">
-              🏆
+          )}
+          {/* Medallas: solo si el usuario tiene alguna */}
+          {badges && badges.filter(b => b.includes('plata') || b.includes('oro')).length > 0 && badges.filter(b => b.includes('plata') || b.includes('oro')).map((badge, idx) => (
+            <div key={badge+idx} className={`rounded-lg p-4 flex flex-col items-center justify-between shadow-md ${badge.includes('plata') ? 'bg-gradient-to-r from-gray-100 to-blue-100' : 'bg-gradient-to-r from-yellow-100 to-yellow-300'}`}>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-2xl">
+                  {badge.includes('plata') ? '🥈' : '🥇'}
+                </span>
+                <h3 className="text-lg font-semibold">
+                  {badge.includes('plata') ? 'Medalla de Plata' : 'Medalla de Oro'}
+                </h3>
+              </div>
+              <span className="text-xs text-gray-500">{badge.replace(/_/g, ' ')}</span>
             </div>
-          </div>
-          
-          <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-4 flex items-center justify-between">
-            <div>
-              <h3 className="text-lg font-semibold text-orange-700">Nivel</h3>
-              <p className="text-3xl font-bold text-orange-600">{Math.floor(xp / 100) + 1}</p>
+          ))}
+          {/* Copas: solo si el usuario tiene alguna */}
+          {badges && badges.filter(b => b.includes('copa')).length > 0 && badges.filter(b => b.includes('copa')).map((badge, idx) => (
+            <div key={badge+idx} className={`rounded-lg p-4 flex flex-col items-center justify-between shadow-md ${badge.includes('plata') ? 'bg-gradient-to-r from-slate-100 to-blue-200' : 'bg-gradient-to-r from-yellow-200 to-yellow-400'}`}>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-2xl">
+                  {badge.includes('plata') ? '🏆' : '🏆'}
+                </span>
+                <h3 className="text-lg font-semibold">
+                  {badge.includes('plata') ? 'Copa de Plata' : 'Copa de Oro'}
+                </h3>
+              </div>
+              <span className="text-xs text-gray-500">{badge.replace(/_/g, ' ')}</span>
             </div>
-            <div className="bg-orange-100 p-3 rounded-full text-orange-600 text-2xl">
-              🔥
-            </div>
-          </div>
+          ))}
         </div>
         
         {/* Medallas del estudiante */}
