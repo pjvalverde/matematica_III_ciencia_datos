@@ -102,41 +102,11 @@ const Navbar = () => {
     );
   }
   
-  // Si no estamos en la semana 1, mostrar la navegación normal
+  // Si no estamos en la semana 1, mostrar solo el título centrado
   return (
     <header className="bg-primary-600 text-white">
-      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-        <Link to="/" className="text-xl font-bold">
-          Cálculo Multivariante
-        </Link>
-        
-        <nav className="flex items-center space-x-6">
-          {user ? (
-            <>
-              <Link to="/" className="hover:text-white/80">
-                Dashboard
-              </Link>
-              <button 
-                onClick={logout}
-                className="hover:text-white/80"
-              >
-                Cerrar sesión
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className="hover:text-white/80">
-                Iniciar sesión
-              </Link>
-              <Link 
-                to="/register" 
-                className="bg-white text-primary-600 px-4 py-2 rounded-md font-medium hover:bg-white/90"
-              >
-                Registrarse
-              </Link>
-            </>
-          )}
-        </nav>
+      <div className="container mx-auto px-4 py-3 flex items-center justify-center">
+        <span className="text-2xl font-bold text-center w-full">Cálculo Multivariante para Ciencia de Datos</span>
       </div>
     </header>
   );
