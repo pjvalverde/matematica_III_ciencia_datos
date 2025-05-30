@@ -6,9 +6,17 @@ interface LoginPageProps {
   isRegister?: boolean;
 }
 
+import { useEffect } from 'react';
+
 const LoginPage = ({ isRegister = false }: LoginPageProps) => {
   const navigate = useNavigate();
-  const { login, register, isLoading } = useAuthStore();
+  const { login, register, isLoading, isAuthenticated } = useAuthStore();
+  
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
