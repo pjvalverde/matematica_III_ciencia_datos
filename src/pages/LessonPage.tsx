@@ -1,3 +1,4 @@
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 const LessonPage = () => {
@@ -17,6 +18,10 @@ const LessonPage = () => {
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-xl font-semibold mb-4">Quiz de comprensión</h2>
         <LessonQuiz />
+      </div>
+    </div>
+  );
+};
 
 function LessonQuiz() {
   const questions = [
@@ -111,10 +116,5 @@ function LessonQuiz() {
     </div>
   );
 }
-
-      </div>
-    </div>
-  );
-};
 
 export default LessonPage;
