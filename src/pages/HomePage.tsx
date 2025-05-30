@@ -35,47 +35,50 @@ const HomePage = () => {
               </div>
             </div>
           )}
-          {/* Medallas: solo si el usuario tiene alguna */}
-          {badges && badges.filter(b => b.includes('plata') || b.includes('oro')).length > 0 && badges.filter(b => b.includes('plata') || b.includes('oro')).map((badge, idx) => (
-            <div key={badge+idx} className={`rounded-lg p-4 flex flex-col items-center justify-between shadow-md ${badge.includes('plata') ? 'bg-gradient-to-r from-gray-100 to-blue-100' : 'bg-gradient-to-r from-yellow-100 to-yellow-300'}`}>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl">
-                  {badge.includes('plata') ? '🥈' : '🥇'}
-                </span>
-                <h3 className="text-lg font-semibold">
-                  {badge.includes('plata') ? 'Medalla de Plata' : 'Medalla de Oro'}
-                </h3>
+          {/* Medallas: solo si el usuario tiene alguna medalla de plata/oro */}
+          {badges && badges.filter(b => b.includes('plata') || b.includes('oro')).length > 0 &&
+            badges.filter(b => b.includes('plata') || b.includes('oro')).map((badge, idx) => (
+              <div key={badge+idx} className={`rounded-lg p-4 flex flex-col items-center justify-between shadow-md ${badge.includes('plata') ? 'bg-gradient-to-r from-gray-100 to-blue-100' : 'bg-gradient-to-r from-yellow-100 to-yellow-300'}`}>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">
+                    {badge.includes('plata') ? '🥈' : '🥇'}
+                  </span>
+                  <h3 className="text-lg font-semibold">
+                    {badge.includes('plata') ? 'Medalla de Plata' : 'Medalla de Oro'}
+                  </h3>
+                </div>
+                <span className="text-xs text-gray-500">{badge.replace(/_/g, ' ')}</span>
               </div>
-              <span className="text-xs text-gray-500">{badge.replace(/_/g, ' ')}</span>
-            </div>
-          ))}
-          {/* Copas: solo si el usuario tiene alguna */}
-          {badges && badges.filter(b => b.includes('copa')).length > 0 && badges.filter(b => b.includes('copa')).map((badge, idx) => (
-            <div key={badge+idx} className={`rounded-lg p-4 flex flex-col items-center justify-between shadow-md ${badge.includes('plata') ? 'bg-gradient-to-r from-slate-100 to-blue-200' : 'bg-gradient-to-r from-yellow-200 to-yellow-400'}`}>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl">
-                  {badge.includes('plata') ? '🏆' : '🏆'}
-                </span>
-                <h3 className="text-lg font-semibold">
-                  {badge.includes('plata') ? 'Copa de Plata' : 'Copa de Oro'}
-                </h3>
+            ))}
+          {/* Copas: solo si el usuario tiene alguna copa */}
+          {badges && badges.filter(b => b.includes('copa')).length > 0 &&
+            badges.filter(b => b.includes('copa')).map((badge, idx) => (
+              <div key={badge+idx} className={`rounded-lg p-4 flex flex-col items-center justify-between shadow-md ${badge.includes('plata') ? 'bg-gradient-to-r from-slate-100 to-blue-200' : 'bg-gradient-to-r from-yellow-200 to-yellow-400'}`}>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">🏆</span>
+                  <h3 className="text-lg font-semibold">
+                    {badge.includes('plata') ? 'Copa de Plata' : 'Copa de Oro'}
+                  </h3>
+                </div>
+                <span className="text-xs text-gray-500">{badge.replace(/_/g, ' ')}</span>
               </div>
-              <span className="text-xs text-gray-500">{badge.replace(/_/g, ' ')}</span>
-            </div>
-          ))}
+            ))}
         </div>
         
         {/* Medallas del estudiante */}
-        {badges.length > 0 && (
+        {badges && badges.filter(b => !b.includes('plata') && !b.includes('oro') && !b.includes('copa')).length > 0 && (
           <div className="mt-6">
-            <h3 className="text-lg font-semibold mb-3">Tus medallas</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-              {badges.map((badge) => (
-                <div key={badge} className="bg-gray-50 border rounded-lg p-3 flex flex-col items-center">
-                  <div className="w-12 h-12 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center mb-2 text-xl">
-                    {badge.includes('week') ? '🏆' : '⭐'}
-                  </div>
-                  <p className="font-medium text-center text-sm">
+            <h3 className="text-lg font-semibold mb-2">Tus medallas</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {badges.filter(b => !b.includes('plata') && !b.includes('oro') && !b.includes('copa')).map((badge, idx) => (
+                <div
+                  key={badge + idx}
+                  className="bg-white rounded-lg shadow p-4 flex flex-col items-center justify-center border"
+                >
+                  <span className="text-3xl mb-2">
+                    {badge.includes('week') ? '🏆' : badge === 'minimalista' ? '⭐' : badge === 'wizard' ? '🧙‍♂️' : '🎖️'}
+                  </span>
+                  <p className="text-sm font-medium text-gray-700">
                     {badge.includes('week')
                       ? `Semana ${badge.split('-')[1]}`
                       : badge === 'minimalista'
