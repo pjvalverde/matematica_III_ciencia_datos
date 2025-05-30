@@ -8,7 +8,7 @@ const DashboardPage = () => {
 
   const logout = useAuthStore(state => state.logout);
   const navigate = useNavigate();
-  const { completedWeeks, badges, xp } = useProgressStore();
+  const { completedWeeks, badges } = useProgressStore();
   
   // Datos simulados de semanas (en una app real vendrían de una API/store)
   const weeks = [
@@ -24,7 +24,7 @@ const DashboardPage = () => {
   
 
   // Calcular progreso global
-  const totalProgress = Math.round((completedWeeks.length / weeks.length) * 100);
+
   
   return (
     <div className="p-8">
